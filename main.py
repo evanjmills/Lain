@@ -27,12 +27,11 @@ async def scrape_anime(user):
 
         anime_list = soup.findAll('table', {'class', 'list-table'})
         anime_list = json.loads(anime_list[0]['data-items'])
-        title = anime_list[random.randint(0, len(anime_list) - 1)]['anime_title']
         partial_url = anime_list[random.randint(0, len(anime_list) - 1)]['anime_url']
         anime_url = f'https://myanimelist.net/{partial_url}'
-        return f'I recommend {title} \n {anime_url}'
+        return f'I recommend {anime_url}'
     except Exception:
-        return f'I could not find {user}\'s plan to watch list'
+        return f'I could not find {user}\'s plan to watch list. Make sure the list is set to public.'
 
 
 @client.event
